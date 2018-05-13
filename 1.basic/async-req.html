@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Asyncronous request example</title>
+    <style>
+        #list {
+            width: 600px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+        #list>thread>tr {
+            color: yellow;
+            background-color: purple;
+        }
+        
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="async-req" v-cloak>
+        <p>
+            이름: <input type="text" v-model="name" placeholder="두자 이상을 입력하세요" />
+        </p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contactlist">
+                    <td v-text="contact.no" />
+                    <td v-text="contact.name" />
+                    <td v-text="contact.tel" />
+                    <td v-text="contact.address" />
+                </tr>
+            </tbody>
+        </table>
+        <div v-show="isProcessing == true">조회중</div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#async-req",
+            data: {
+                name: "",
+                isProcessing: false,
+                contactlist: []
+            },
+            watch: {
+                name: function(value) {
+                    if (value.length >= 2) {
+                        this.fetchContacts();
+                    } else {
+                        this.contactlist = [];
+                    }
+                }
+            },
+            methods: {
+                fetchContacts: _.debounce(function() {
+                    this.contactlist = [];
+                    this.isProcessing = true;
+                    var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + this.name;
+                    var vm = this;
+                    fetch(url)
+                        .then(function(response) {
+                            return response.json()
+                        }).then(function(json) {
+                            vm.contactlist = json;
+                            vm.isProcessing = false;
+                        }).catch(function(ex) {
+                            console.log('parsing failed', ex);
+                            vm.contactlist = [];
+                            vm.isProcessing = false;
+                        })
+                }, 300)
+            }
+        })
+    </script>
+</body>
+
+</html>

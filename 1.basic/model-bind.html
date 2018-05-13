@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>How to use v-model and v-bind ?</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="simple">
+        <input type="text" v-model="message">
+        <h2 v-bind:value="message" v-text="message"></h2>
+        <h2 v-bind:value="message" v-html="message"></h2>
+    </div>
+
+    <script>
+        var model = {
+            message: "default-value"
+        }
+        var simple = new Vue({
+            el: '#simple',
+            data: model
+        })
+    </script>
+</body>
+
+</html>

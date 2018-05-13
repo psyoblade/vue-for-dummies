@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="simple">
+        <h2>{{message}}</h2>
+        x: <input type='text' v-model="x" /><br/> y: <input type='text' v-model="y" /><br/> 덧셈 결과 : {{sum}}
+    </div>
+
+    <script>
+        var model = {
+            message: "첫 번째 Vue.js 스크립트 입니다.",
+            x: 0,
+            y: 0
+
+        }
+        var simple = new Vue({
+            el: '#simple',
+            data: model,
+            computed: {
+                sum: function() {
+                    console.log(new Date())
+                    var result = Number(this.x) + Number(this.y)
+                    if (isNaN(result)) return 0;
+                    else return result;
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

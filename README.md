@@ -50,3 +50,9 @@ var vue = new Vue({ data: messge })
 
 ### [async-request](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/async-req.html) : watch, promise, debounce, lifecycle
 <img src="images/lifecycle.png"/>
+
+
+## Event Handling
+
+### [Event Reference](https://developer.mozilla.org/en-US/docs/Web/Events)
+### [HTML Event Attributes](https://www.w3schools.com/tags/ref_eventattributes.asp)

@@ -49,4 +49,4 @@ var vue = new Vue({ data: messge })
 ```
 
 ### [async-request](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/async-req.html) : watch, promise, debounce
-<img src="images/lifecycle.png" width="360">
+<img src="images/lifecycle.png"/>

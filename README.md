@@ -47,3 +47,6 @@ var vue = new Vue({ data: messge })
     <option v-for=”(v, k, i) in items” v-bind:value=”k” v-text=”v” v-if=”value.length > 4”/>
  </select>
 ```
+
+### [async-request](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/async-req.html) : watch, promise, debounce
+<img src="images/lifecycle.png" width="360">

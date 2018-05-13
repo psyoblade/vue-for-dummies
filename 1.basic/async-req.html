@@ -61,6 +61,7 @@
         var vm = new Vue({
             el: "#async-req",
             data: {
+                num: 0,
                 name: "",
                 isProcessing: false,
                 contactlist: []
@@ -89,9 +90,24 @@
                         }).catch(function(ex) {
                             console.log('parsing failed', ex);
                             vm.contactlist = [];
-                            vm.isProcessing = false;
+                            vm.isProcessing = fa
                         })
                 }, 300)
+            },
+            created: function() {
+                console.log("created!")
+                console.log(this.num)
+            },
+            updated: function() {
+                console.log("updated!")
+                console.log(this.num)
+            },
+            computed: {
+                sum: function() {
+                    var n = Number(this.num);
+                    if (Number.isNaN(n) || n < 1) return 0;
+                    return ((1 + n) * n) / 2;
+                }
             }
         })
     </script>

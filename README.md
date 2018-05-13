@@ -48,5 +48,5 @@ var vue = new Vue({ data: messge })
  </select>
 ```
 
-### [async-request](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/async-req.html) : watch, promise, debounce
+### [async-request](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/async-req.html) : watch, promise, debounce, lifecycle
 <img src="images/lifecycle.png"/>

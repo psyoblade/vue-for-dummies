@@ -56,3 +56,23 @@ var vue = new Vue({ data: messge })
 
 ### [Event Reference](https://developer.mozilla.org/en-US/docs/Web/Events)
 ### [HTML Event Attributes](https://www.w3schools.com/tags/ref_eventattributes.asp)
+
+### [v-on](https://github.com/psyoblade/vue-for-dummies/blob/master/2.event/event-handling.html) 이벤트 처리
+```html
+    <div id="example">
+        <button v-on:click="alert('in-line-click')"/>
+        <button v-on:click="alertMessage"/>
+        <button @click="alertMessage"/>
+    </div>
+    <script>
+        var vm = Vue({
+            el: "#example",
+            data: {},
+            methods: {
+                alertMessage: function() {
+                    alert('event handling message')
+                }
+            }
+        })
+    </script>
+```

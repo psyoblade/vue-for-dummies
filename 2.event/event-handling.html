@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>in-line event handling example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        #outer {
+            width: 200px;
+            height: 350px;
+            border: solid 2px black;
+            background-color: aqua;
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            padding: 10px 10px 10px 10px;
+        }
+        
+        #inner {
+            width: 150px;
+            height: 100px;
+            border: solid 2px black;
+            background-color: yellow;
+        }
+        
+        .layout1 {
+            margin: 30px 30px 30px 30px;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="in-line-event-example" v-on:contextmenu="preventContextMenu">
+        <div id="outer" @click="outerClick">
+            <button id="in-line-event-button" v-on:click="window.alert('in-line-button cliecked.')">In-line button</button>
+            </p>
+            <div id="inner" @click.capture.stop="innerClick1">
+                <button id="event-handler-method-button" v-on:click="eventHandlerMethod">Method button</button>
+            </div>
+            </p>
+            <div id="inner" @click="innerClick2">
+                <a href="http://facebook.com" v-on:click="surfFacebook">facebook</a>
+            </div>
+            </p>
+            <button id="only-once-event-method" v-on:click.once="addOne">Once Add Button</button>
+            <button id="many-event-method" v-on:click="addOne">Many Add Button</button>
+            <input type="label" v-bind:value="amount" />
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#in-line-event-example",
+                data: {
+                    message: "in-line-buttone clicked !!!",
+                    amount: 0,
+                },
+                methods: {
+                    eventHandlerMethod: function(e) {
+                        alert(this.message)
+                        console.log(e)
+                    },
+                    preventContextMenu: function(e) {
+                        e.preventDefault()
+                    },
+                    surfFacebook: function(e) {
+                        if (confirm("페이스북으로 이동할까요?")) {
+                            console.log("confirmed")
+                        } else {
+                            console.log("canceled")
+                            e.preventDefault()
+                        }
+                    },
+                    loggingEvent: function(e, message) {
+                        console.log(message)
+                        console.log("Event Phase : ", e.eventPhase)
+                        console.log("Current Target : ", e.currentTarget)
+                        console.log("Target : ", e.target)
+                    },
+                    outerClick: function(e) {
+                        this.loggingEvent(e, "### OUTER CLICKED ###")
+                        e.stopPropagation();
+                    },
+                    innerClick1: function(e) {
+                        this.loggingEvent(e, "### INNER 1 CLICKED ###")
+                    },
+                    innerClick2: function(e) {
+                        this.loggingEvent(e, "### INNER 2 CLICKED ###")
+                    },
+                    addOne: function() {
+                        this.amount += 1;
+                    },
+                }
+            })
+        </script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Asyncronous request example</title>
+    <title>Asyncronous & Synchronous request example</title>
     <style>
         #list {
             width: 600px;
@@ -31,7 +31,7 @@
 <body>
     <div id="async-req" v-cloak>
         <p>
-            이름: <input type="text" v-model="name" placeholder="두자 이상을 입력하세요" />
+            이름(async-req): <input type="text" v-model="name" placeholder="두자 이상을 입력하세요" /> 이름(event-req): <input type="text" v-on:keyup.13="search" placeholder="두자 이상을 입력하세요" />
         </p>
         <table id="list">
             <thead>
@@ -92,7 +92,16 @@
                             vm.contactlist = [];
                             vm.isProcessing = fa
                         })
-                }, 300)
+                }, 300),
+                search: function(e) {
+                    var val = e.target.value
+                    this.name = val
+                    if (val.length >= 2) {
+                        this.fetchContacts()
+                    } else {
+                        this.contactlist = []
+                    }
+                }
             },
             created: function() {
                 console.log("created!")

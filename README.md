@@ -26,6 +26,12 @@ $> npm install -g vue-cli
 $> npm init simple my-simple-vuejs
 ```
 
+
+## Vue 꿀팁
+
+### 수정한 Vue 정보가 webpack --watch 수행 후에도 과거의 페이지가 보일 때
+* Option + Command + I : Network : Disabled cache
+
 ## Vue 디렉티브
 ### [hello-vue-js](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/index.html)
 * v-text, {{ }} : innerText 값에 binding. 단, html parsing 하지 않으므로 tag 입력을 그대로 할 수 있음

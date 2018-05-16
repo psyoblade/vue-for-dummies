@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>inner component example</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <hello></hello>
+        <vue></vue>
+        <hello></hello>
+    </div>
+
+    <div id="app2">
+        <search-component placeholder="입력" v-on:search="searchQuery"></search-component>
+        <list-component v-bind:result="searchResult"></list-component>
+    </div>
+
+    <template id="searchTemplate">
+        <input type="text" v-model="name" :placeholder="placeholder" @keyup.enter="keyupEvent"/>
+    </template>
+
+    <template id="listTemplate">
+        <input type="text" v-text="result" />
+    </template>
+
+    <script type="text/javascript">
+        Vue.config.devtools = true
+        var searchComponent = Vue.extend({
+            template: '#searchTemplate',
+            props: ['placeholder'],
+            data: function() {
+                return {
+                    name: undefined
+                }
+            },
+            methods: {
+                keyupEvent: function(e) {
+                    var val = e.target.value
+                    this.$emit('search', val)
+                }
+            }
+        })
+        var listComponent = Vue.extend({
+            template: '#listTemplate',
+            props: ['result'],
+            data: function() {
+                return {
+                    result: undefined,
+                    isProcessing: false
+                }
+            }
+        })
+        Vue.component('search-component', searchComponent)
+        Vue.component('list-component', listComponent)
+        Vue.component('hello', {
+            template: '<h1>Hello vue!</h1>'
+        });
+        Vue.component('vue', {
+            template: '<h1>Welcome to vue !</h1>'
+        });
+
+        // create a new Vue instance and mount it to our div element above with the id of app
+        var vm = new Vue({
+            el: '#app2',
+            data: {
+                searchResult: undefined
+            },
+            methods: {
+                searchQuery: function(e) {
+                    var res = e + '에 대한 검색결과를 출력합니다.'
+                    this.searchResult = res
+                    alert(res)
+                }
+            }
+        });
+
+        /*
+        var vue = new Vue({
+            el: "#test",
+            data: {
+                searchResult: undefined
+            },
+            methods: {
+                searchQuery: function(e) {
+                    var res = e + '에 대한 검색결과를 출력합니다.'
+                    this.searchResult = res
+                    alert(res)
+                }
+            }
+        })
+        */
+    </script>
+</body>
+
+</html>

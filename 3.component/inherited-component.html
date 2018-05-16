@@ -66,8 +66,8 @@
                     <th>주소</th>
                 </tr>
             </thead>
-            <tbody id="contacts">
-                <tr v-for="contact in contactlist">
+            <tbody id="tableContacts">
+                <tr v-for="contact in contacts">
                     <td v-text="contact.no" />
                     <td v-text="contact.name" />
                     <td v-text="contact.tel" />
@@ -86,8 +86,8 @@
     <!-- search-contact-component 시작 -->
     <template id="searchContactTemplate">
         <div>
-            <search-component placeholder="두 글자 이상 입력후 엔터!" v-on:search="searchEvent"/>
-            <contactlist-component v-bind:contacts="contactlist"/>
+            <search-component placeholder="두 글자 이상 입력후 엔터!" v-on:search="searchEvent"></search-component>
+            <contactlist-component v-bind:contacts="contactlist"></contactlist-component>
             <div v-show="isProcessing === true">조회중</div>
         </div>
     </template>
@@ -105,6 +105,7 @@
                     console.log("searchEvent called....", name)
                     if (name == '') {
                         this.contactlist = []
+                        console.log('name is null')
                     } else {
                         this.fetchContacts(name)
                     }
@@ -137,7 +138,7 @@
 
 <body>
     <div id="app">
-        <search-contact-component/>
+        <search-contact-component></search-contact-component>
     </div>
 </body>
 

@@ -32,6 +32,9 @@ $> npm init simple my-simple-vuejs
 ### 수정한 Vue 정보가 webpack --watch 수행 후에도 과거의 페이지가 보일 때
 * Option + Command + I : Network : Disabled cache
 
+### 컴포넌트를 여러개 나열 했을 때에 처음 컴포넌트만 보일 때
+* Component Tag 입력 시에 닫는 Tag 값을 <Tag.../> 와 같이 닫지 않고 명시적으로 <\/Tag> 와 같이 닫는다.
+
 ## Vue 디렉티브
 ### [hello-vue-js](https://github.com/psyoblade/vue-for-dummies/blob/master/1.basic/index.html)
 * v-text, {{ }} : innerText 값에 binding. 단, html parsing 하지 않으므로 tag 입력을 그대로 할 수 있음

@@ -85,3 +85,9 @@ var vue = new Vue({ data: messge })
         })
     </script>
 ```
+
+## Component Composition
+
+### [Inherited Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/inherited-component.html)
+
+### [Eventbus Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/eventbus-component.html)

@@ -93,8 +93,8 @@ var vue = new Vue({ data: messge })
 
 ## Component Composition
 
-### [Inherited Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/inherited-component.html)
+### [Inherited Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/inherited-component.html) 컴포넌트 상속
 
-### [Modal Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/modal-component.html)
+### [Modal Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/modal-component.html) 모달 창을 통해 값을 주고 받기
 
-### [Eventbus Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/eventbus-component.html)
+### [Eventbus Component](https://github.com/psyoblade/vue-for-dummies/blob/master/3.component/eventbus-component.html) 이벤트 버스 컴포넌트

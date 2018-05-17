@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Inherited component example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- start of text-input-component -->
+    <template id="textInputTemplate">
+        <div>
+            <input type="text" v-model="value" @keyup.enter="keyupEvent" :placeholder="placeholder" :size="size"></input>
+        </div>
+    </template>
+    <script type="text/javascript">
+        Vue.component('text-input-component', {
+            template: '#textInputTemplate',
+            props: ['placeholder', 'size'],
+            data: function() {
+                return {
+                    value: undefined
+                }
+            },
+            methods: {
+                keyupEvent: function(e) {
+                    let val = this.value
+                    console.log(val)
+                    this.$emit('show', val)
+                },
+            }
+        })
+    </script>
+    <!-- end of text-input-component -->
+    <!-- start of modal-component -->
+    <template id="modalTemplate">
+        <div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" v-model="body"></input>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" @click="saveChanges">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script type="text/javascript">
+        Vue.component('modal-component', {
+            template: '#modalTemplate',
+            props: ['title'],
+            data: function() {
+                return {
+                    body: undefined
+                }
+            },
+            methods: {
+                saveChanges: function() {
+                    $('#myModal').modal('hide')
+                    console.log('saveChanges')
+                    this.$emit('save', this.body)
+                },
+            }
+        })
+    </script>
+    <!-- end of modal-component -->
+</head>
+
+<body>
+    <div id="example">
+        </p>
+        <text-input-component v-on:show="show" :placeholder="placeholder" size="50"></text-input-component>
+        </p>
+        <modal-component :title="title" v-on:save="save"></modal-component>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">모달창 열기</button>
+    </div>
+    <script type="text/javascript">
+        const defaultTitle = "모달 창과 값을 주고 받는 예제"
+        const defaultPlaceholder = "타이틀을 입력 후에 엔터를 치세요"
+        var vue = new Vue({
+            el: "#example",
+            data: {
+                title: defaultTitle,
+                placeholder: defaultPlaceholder
+            },
+            methods: {
+                show: function(val) {
+                    this.title = val
+                    $('#myModal').modal() // initialized with defaults
+                    $('#myModal').modal({
+                            keyboard: false,
+                        }) // initialized with no keyboard
+                    $('#myModal').modal('show') // initializes and invokes show immediately
+                },
+                save: function(body) {
+                    console.log("save changes", body)
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
